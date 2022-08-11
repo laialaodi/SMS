@@ -7,8 +7,8 @@ import os
 if __name__ == '__main__':
     _user_password = {}
     with open('password.txt', 'r') as _f:
-        _files = _f.readlines()
-    for _file in _files:
+        _lines = _f.readlines()
+    for _file in _lines:
         _user_password[_file.split()[0]] = _file.split()[1]
 
     print('欢迎进入系统')
@@ -73,6 +73,7 @@ if __name__ == '__main__':
             print('例子：六年级是6，六（3）班级则是603')
             print('注意，六（10）班仍然是6010')
             _user_input = input('请输入年级和班级：')
+            print(f'{_user_input.strip()[0]}（{int(_user_input.strip()[1:])}）班的学生有：')
             _link.list_(*_user_input.strip().split())
         else:
             print('输入错误！')
