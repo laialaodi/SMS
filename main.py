@@ -4,21 +4,21 @@
 import lib.sql
 
 if __name__ == '__main__':
-    link = lib.sql.School(grades=6, classes=5)
-    user_password = dict()
-    with open('password.txt', 'r') as f:
-        files = f.readlines()
-    for file in files:
-        user_password[file.split()[0]] = file.split()[1]
+    _link = lib.sql.School(grades=6, classes=5)
+    _user_password = {}
+    with open('password.txt', 'r') as _f:
+        _files = _f.readlines()
+    for _file in _files:
+        _user_password[_file.split()[0]] = _file.split()[1]
 
     print('欢迎进入系统')
     print('请登录')
     while 1:
         _user_input = input('请输入用户名和密码：')
         _user_input = _user_input.strip().split()
-        if user_password[_user_input[0]] == _user_input[1]:
+        if _user_password[_user_input[0]] == _user_input[1]:
             break
-        elif _user_input[0] not in user_password:
+        elif _user_input[0] not in _user_password:
             print('注册用户须得到管理员的许可，请向管理员提出申请')
         else:
             print('用户名或密码错误！')
@@ -40,7 +40,7 @@ if __name__ == '__main__':
             _grade = int(_user_input[0])
             _class = _user_input[1]
             _name = _user_input[2]
-            link.add(_grade=_grade, _class=_class, _name=_name)
+            _link.add(_grade=_grade, _class=_class, _name=_name)
         elif _user_input == '2':
             print('例子：六年级是6，六（3）班级则是603')
             _user_input = input('请输入学生的年级班级姓名并用一个空格分开：')
@@ -48,10 +48,10 @@ if __name__ == '__main__':
             _grade = int(_user_input[0])
             _class = _user_input[1]
             _name = _user_input[2]
-            link.remove(_grade=_grade, _class=_class, _name=_name)
+            _link.remove(_grade=_grade, _class=_class, _name=_name)
         elif _user_input == '3':
             print('例子：六年级是6，六（3）班级则是603')
             _user_input = input('请输入年级和班级：')
-            link.list_(*_user_input.strip().split())
+            _link.list_(*_user_input.strip().split())
         else:
             print('输入错误！')
