@@ -49,7 +49,7 @@ if __name__ == '__main__':
             print('添加学生请按1')
             print('删除学生请按2')
             print('查询学生请按3')
-            print('退出系统请输入exit')
+            print('退出系统请输入exit（直接退出不会保存！）')
             print('保存数据请输入save')
         elif _user_input == '1':
             print('例子：六年级是6，六（3）班级则是603')
