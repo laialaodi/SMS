@@ -19,7 +19,7 @@ if __name__ == '__main__':
         if _user_password[_user_input[0]] == _user_input[1]:
             break
         elif _user_input[0] not in _user_password:
-            print('注册用户须得到管理员的许可，请向管理员提出申请')
+            print('账户注册须得到管理员的许可，请向管理员提出申请，让管理员为你创建一个账户')
         else:
             print('用户名或密码错误！')
 
