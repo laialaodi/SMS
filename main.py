@@ -4,7 +4,6 @@
 import lib.sql
 
 if __name__ == '__main__':
-    _link = lib.sql.School(grades=6, classes=5)
     _user_password = {}
     with open('password.txt', 'r') as _f:
         _files = _f.readlines()
@@ -23,8 +22,10 @@ if __name__ == '__main__':
         else:
             print('用户名或密码错误！')
 
+    _link = lib.sql.School(grades=6, classes=5)
     print('登录成功')
     print(f'欢迎您，{_user_input[0]}')
+    _link.load_file('data')
     while 1:
         print('添加学生请按1')
         print('删除学生请按2')
@@ -58,3 +59,5 @@ if __name__ == '__main__':
             _link.list_(*_user_input.strip().split())
         else:
             print('输入错误！')
+    _link.save_file('data')
+    print('数据已保存')

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from pprint import pprint
+import json
 
 
 class School:
@@ -25,3 +25,11 @@ class School:
     def list_(self, _grade: str, _class: str) -> None:
         for i in self.table[int(_grade) - 1]['classes'][_class]['students']:
             print(i)
+
+    def load_file(self, file_name: str) -> None:
+        with open('data', 'r') as f:
+            self.table = json.load(f)
+
+    def save_file(self, file_name: str) -> None:
+        with open(file_name, 'w') as f:
+            json.dump(self.table, f, skipkeys=True, ensure_ascii=False, indent=2)
