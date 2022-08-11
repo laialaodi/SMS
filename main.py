@@ -35,6 +35,7 @@ if __name__ == '__main__':
             break
         elif _user_input == '1':
             print('例子：六年级是6，六（3）班级则是603')
+            print('注意，六（10）班仍然是6010')
             _user_input = input('请输入学生的年级班级姓名并用一个空格分开：')
             _user_input = _user_input.strip().split()
             _grade = int(_user_input[0])
@@ -43,6 +44,7 @@ if __name__ == '__main__':
             _link.add(_grade=_grade, _class=_class, _name=_name)
         elif _user_input == '2':
             print('例子：六年级是6，六（3）班级则是603')
+            print('注意，六（10）班仍然是6010')
             _user_input = input('请输入学生的年级班级姓名并用一个空格分开：')
             _user_input = _user_input.strip().split()
             _grade = int(_user_input[0])
@@ -51,6 +53,7 @@ if __name__ == '__main__':
             _link.remove(_grade=_grade, _class=_class, _name=_name)
         elif _user_input == '3':
             print('例子：六年级是6，六（3）班级则是603')
+            print('注意，六（10）班仍然是6010')
             _user_input = input('请输入年级和班级：')
             _link.list_(*_user_input.strip().split())
         else:
