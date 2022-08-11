@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import lib.sql
+import os
 
 if __name__ == '__main__':
     _user_password = {}
@@ -22,18 +23,34 @@ if __name__ == '__main__':
         else:
             print('用户名或密码错误！')
 
-    _link = lib.sql.School(grades=6, classes=5)
+    if os.path.exists('data'):
+        _link = lib.sql.School(grades=-1, classes=-1)
+        _link.load_file('data')
+    else:
+        _link = lib.sql.School(grades=6, classes=5)
     print('登录成功')
     print(f'欢迎您，{_user_input[0]}')
-    _link.load_file('data')
+    print('添加学生请按1')
+    print('删除学生请按2')
+    print('查询学生请按3')
+    print('退出系统请输入exit')
+    print('保存数据请输入save')
+    print('从文件中还原数据请输入load')
+    print('再次查看本帮助请输入help')
     while 1:
-        print('添加学生请按1')
-        print('删除学生请按2')
-        print('查询学生请按3')
-        print('退出系统请输入exit')
         _user_input = input('请输入：')
         if _user_input == 'exit':
             break
+        elif _user_input == 'save':
+            _link.save_file('data')
+        elif _user_input == 'load':
+            _link.load_file('data')
+        elif _user_input == 'help':
+            print('添加学生请按1')
+            print('删除学生请按2')
+            print('查询学生请按3')
+            print('退出系统请输入exit')
+            print('保存数据请输入save')
         elif _user_input == '1':
             print('例子：六年级是6，六（3）班级则是603')
             print('注意，六（10）班仍然是6010')
