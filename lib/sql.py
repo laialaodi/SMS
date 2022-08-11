@@ -16,8 +16,12 @@ class School:
         self.table[_grade - 1]['classes'][_class]['students'].append(_name)
 
     def remove(self, _grade: int, _class: str, _name: str) -> None:
-        del self.table[_grade - 1]['classes'][_class]['students'][
-            self.table[_grade - 1]['classes'][_class]['student'].index(_name)]
+        try:
+            del self.table[_grade - 1]['classes'][_class]['students'][
+                self.table[_grade - 1]['classes'][_class]['students'].index(_name)]
+        except ValueError:
+            print('无法删除')
 
     def list_(self, _grade: str, _class: str) -> None:
-        pprint(self.table[int(_grade) - 1]['classes'][_class]['students'])
+        for i in self.table[int(_grade) - 1]['classes'][_class]['students']:
+            print(i)

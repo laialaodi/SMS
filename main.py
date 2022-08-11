@@ -12,7 +12,9 @@ if __name__ == '__main__':
         print('删除学生请按2')
         print('查询学生请按3')
         _user_input = input('请输入：')
-        if _user_input == '1':
+        if _user_input == 'exit':
+            break
+        elif _user_input == '1':
             _user_input = input('请输入学生的年级班级姓名并用一个空格分开：')
             _grade = int(_user_input.split()[0])
             _class = _user_input.split()[1]
