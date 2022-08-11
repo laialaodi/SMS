@@ -20,7 +20,7 @@ class School:
             del self.table[_grade - 1]['classes'][_class]['students'][
                 self.table[_grade - 1]['classes'][_class]['students'].index(_name)]
         except ValueError:
-            print('无法删除')
+            print('您删除了一个不存在的数值！')
 
     def list_(self, _grade: str, _class: str) -> None:
         for i in self.table[int(_grade) - 1]['classes'][_class]['students']:
