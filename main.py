@@ -25,13 +25,7 @@ if __name__ == '__main__':
             _name = _user_input.split()[2]
             link.remove(_grade=_grade, _class=_class, _name=_name)
         elif _user_input == '3':
-            while 1:
-                _user_input = input('请输入：')
-                if _user_input == 'exit':
-                    break
-                elif _user_input[0:7] == 'select ':
-                    link.list_(*_user_input[7:].strip().split())
-                else:
-                    print('输入错误！')
+            _user_input = input('请输入年级和班级：')
+            link.list_(*_user_input.strip().split())
         else:
             print('输入错误！')
