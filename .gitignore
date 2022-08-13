@@ -1,10 +1,9 @@
 /.idea
 /lib/__pycache__/
 /password.txt
-/data
+/data.sms
 /venv
 /build
-/dist.zip
 /dist
 /main.spec
 /sms*
