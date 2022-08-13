@@ -40,7 +40,7 @@ if __name__ == '__main__':
     print('查询学生请按3')
     print('退出系统请输入exit')
     print('保存数据请输入save')
-    print('还原（导入）数据请输入load')
+    print('导入（还原）数据请输入load')
     print('再次查看本帮助请输入help')
     while 1:
         _user_input = input('请输入：')
