@@ -27,9 +27,9 @@ if __name__ == '__main__':
         else:
             print('用户名或密码错误！')
 
-    if os.path.exists('data'):
+    if os.path.exists('data.sms'):
         _link = lib.sql.School(grades=-1, classes=-1)
-        _link.load_file('data')
+        _link.load_file('data.sms')
     else:
         _user_input = input('data文件未创建，请设定初始的年级数和班级数：').strip().split()
         _link = lib.sql.School(grades=int(_user_input[0]), classes=int(_user_input[1]))
