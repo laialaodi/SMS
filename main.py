@@ -87,7 +87,7 @@ if __name__ == '__main__':
 
     import_data()
 
-    print(f'欢迎您，{user_name}')
+    print(f'欢迎你，{user_name}')
     print('添加学生: 1')
     print('删除学生: 2')
     print('查询学生: 3')
@@ -128,7 +128,11 @@ if __name__ == '__main__':
             grade = int(user_input[0])
             class_ = int(user_input[1])
             name = user_input[2]
-            link.add_student(grade, class_, name)
+            return_status_code = link.add_student(grade, class_, name)
+            if return_status_code == 0:
+                pass
+            elif return_status_code == -1:
+                print('你触发了IndexError')
         elif user_input == '2':
             print('例子:六年级是6，六(3)班级则是6 3')
             print('hint: 六(10)班仍然是6 10')
@@ -140,7 +144,9 @@ if __name__ == '__main__':
             if return_status_code == 0:
                 pass
             elif return_status_code == -1:
-                print('您删除了一个不存在的数值！')
+                print('你正在删除一个不存在的学生！')
+            elif return_status_code == -2:
+                print('你正在删除一个不存在的班级！')
         elif user_input == '3':
             print('例子:六年级是6，六(3)班级则是6 3')
             print('hint: 六(10)班仍然是6 10')
