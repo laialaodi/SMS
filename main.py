@@ -160,13 +160,17 @@ if __name__ == '__main__':
             link.list_student(*list(map(int, user_input)))
         else:
             print('输入错误!')
-    if 'save_file_name' in locals():
-        link.save_student_to_file(save_file_name)
-        print('数据已保存')
-    else:
-        save_file_name = input('请输入保存文件名:')
-        return_status_code = link.save_student_to_file(save_file_name)
-        if return_status_code == 0:
+
+    while 1:
+        if 'save_file_name' in locals():
+            link.save_student_to_file(save_file_name)
             print('数据已保存')
-        elif return_status_code == -1:
-            print('保存失败')
+            break
+        else:
+            save_file_name = input('请输入保存文件名:')
+            return_status_code = link.save_student_to_file(save_file_name)
+            if return_status_code == 0:
+                print('数据已保存')
+                break
+            elif return_status_code == -1:
+                print('保存失败')
