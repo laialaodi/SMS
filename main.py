@@ -126,7 +126,7 @@ if __name__ == '__main__':
             print('hint: 六(10)班仍然是610')
             user_input = input('请输入学生的年级班级姓名并用一个空格分开:').strip().split()
             grade = int(user_input[0])
-            class_ = user_input[1]
+            class_ = int(user_input[1])
             name = user_input[2]
             link.add_student(grade, class_, name)
         elif user_input == '2':
@@ -134,7 +134,7 @@ if __name__ == '__main__':
             print('hint: 六(10)班仍然是6 10')
             user_input = input('请输入学生的年级班级姓名并用一个空格分开:').strip().split()
             grade = int(user_input[0])
-            class_ = user_input[1]
+            class_ = int(user_input[1])
             name = user_input[2]
             return_status_code = link.remove_student(grade, class_, name)
             if return_status_code == 0:
