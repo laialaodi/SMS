@@ -1,87 +1,150 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import os
-
 import lib.sql
 
-if __name__ == '__main__':
-    _user_password = {}
-    with open('password.txt', 'r') as _f:
-        _lines = _f.readlines()
-    for _file in _lines:
-        _user_password[_file.split()[0]] = _file.split()[1]
+user_password = {}
 
+user_name = str()
+
+link = None
+
+
+def import_password() -> None:
+    """由文件导入密码
+
+    参数
+        无
+
+    返回值
+        无
+    """
+    try:
+        with open('password.txt', 'r') as f:
+            lines = f.readlines()
+        for line in lines:
+            user_password[line.split()[0]] = line.split()[1]
+    except:
+        pass
+
+
+def login():
+    """登录系统
+
+    参数
+        无
+
+    返回值
+        无
+    """
+    global user_name
     print('欢迎进入系统')
     print('请登录')
     while 1:
-        _user_input = input('请输入用户名和密码：')
-        _user_input = _user_input.strip().split()
-        if _user_input[0] not in _user_password:
+        user_input = input('请输入用户名和密码:')
+        user_input = user_input.strip().split()
+        if user_input[0] not in user_password:
             print('账户注册须得到管理员的许可，请向管理员提出申请，让管理员为你创建一个账户')
-        elif len(_user_input) == 1:
-            print('缺少用户名或密码！')
-        elif _user_password[_user_input[0]] == _user_input[1]:
-            _user_name = _user_input[0]
+        elif len(user_input) == 1:
+            print('缺少用户名或密码!')
+        elif user_password[user_input[0]] == user_input[1]:
+            user_name = user_input[0]
             break
         else:
-            print('用户名或密码错误！')
+            print('用户名或密码错误!')
 
-    if os.path.exists('data.sms'):
-        _link = lib.sql.School(grades=-1, classes=-1)
-        _link.load_file('data.sms')
-    else:
-        _user_input = input('data文件未创建，请设定初始的年级数和班级数：').strip().split()
-        _link = lib.sql.School(grades=int(_user_input[0]), classes=int(_user_input[1]))
-        print('初始化成功')
-    print(f'欢迎您，{_user_name}')
-    print('添加学生请按1')
-    print('删除学生请按2')
-    print('查询学生请按3')
-    print('退出系统请输入exit')
-    print('保存数据请输入save')
-    print('导入（还原）数据请输入load')
-    print('再次查看本帮助请输入help')
+
+def import_data():
+    global link
     while 1:
-        _user_input = input('请输入：')
-        if _user_input == 'exit':
+        user_input = input('请输入导入文件名(初次使用请回车跳过):')
+        if user_input == '':
+            user_input = input('文件未创建，请设定初始的年级数和班级数:').strip().split()
+            link = lib.sql.School(grades=int(
+                user_input[0]), classes=int(user_input[1]))
             break
-        elif _user_input == 'save':
-            _link.save_file('data.sms')
-        elif _user_input == 'load':
-            _link.load_file('data.sms')
-        elif _user_input == 'help':
+        else:
+            link = lib.sql.School(grades=-1, classes=-1)
+            return_status_code = link.from_file_load_student(user_input)
+            if return_status_code == 0:
+                print('导入成功')
+                break
+            elif return_status_code == -1:
+                print('文件不存在!')
+
+
+if __name__ == '__main__':
+    import_password()
+
+    login()
+
+    import_data()
+
+    print(f'欢迎您，{user_name}')
+    print('添加学生: 1')
+    print('删除学生: 2')
+    print('查询学生: 3')
+    print('退出系统: exit(直接退出不会保存!)')
+    print('保存数据: save')
+    print('导入(还原)数据: load')
+    print('再次查看本帮助: help')
+    while 1:
+        user_input = input('请输入:')
+        if user_input == 'exit':
+            break
+        elif user_input == 'save':
+            save_file_name = input('请输入保存文件名:')
+            return_status_code = link.save_student_to_file(save_file_name)
+            if return_status_code == 0:
+                pass
+            elif return_status_code == -1:
+                print('保存失败')
+        elif user_input == 'load':
+            load_file_name = input('请输入导入文件名:')
+            return_status_code = link.from_file_load_student(load_file_name)
+            if return_status_code == 0:
+                pass
+            elif return_status_code == -1:
+                print('找不到文件')
+        elif user_input == 'help':
             print('命令手册')
             print('添加学生: 1')
             print('删除学生: 2')
             print('查询学生: 3')
-            print('退出系统: exit（直接退出不会保存！）')
+            print('退出系统: exit(直接退出不会保存!)')
             print('保存数据: save')
-        elif _user_input == '1':
-            print('例子：六年级是6，六（3）班级则是603')
-            print('hint: 六（10）班仍然是6010')
-            _user_input = input('请输入学生的年级班级姓名并用一个空格分开：')
-            _user_input = _user_input.strip().split()
-            _grade = int(_user_input[0])
-            _class = _user_input[1]
-            _name = _user_input[2].encode('utf-8').decode('utf-8')
-            _link.add(_grade=_grade, _class=_class, _name=_name)
-        elif _user_input == '2':
-            print('例子：六年级是6，六（3）班级则是603')
-            print('hint: 六（10）班仍然是6010')
-            _user_input = input('请输入学生的年级班级姓名并用一个空格分开：')
-            _user_input = _user_input.strip().split()
-            _grade = int(_user_input[0])
-            _class = _user_input[1]
-            _name = _user_input[2]
-            _link.remove(_grade=_grade, _class=_class, _name=_name)
-        elif _user_input == '3':
-            print('例子：六年级是6，六（3）班级则是603')
-            print('hint: 六（10）班仍然是6010')
-            _user_input = input('请输入年级和班级：')
-            print(f'{int(_user_input.strip()[1:])}班的学生有：')
-            _link.list_(*_user_input.strip().split())
+            print('导入(还原)数据: load')
+        elif user_input == '1':
+            print('例子:六年级是6，六(3)班级则是63')
+            print('hint: 六(10)班仍然是610')
+            user_input = input('请输入学生的年级班级姓名并用一个空格分开:')
+            user_input = user_input.strip().split()
+            grade = int(user_input[0])
+            class_ = user_input[1]
+            name = user_input[2].encode('utf-8').decode('utf-8')
+            link.add_student(_grade=grade, _class=class_, _name=name)
+        elif user_input == '2':
+            print('例子:六年级是6，六(3)班级则是6 3')
+            print('hint: 六(10)班仍然是6 10')
+            user_input = input('请输入学生的年级班级姓名并用一个空格分开:')
+            user_input = user_input.strip().split()
+            grade = int(user_input[0])
+            class_ = user_input[1]
+            name = user_input[2]
+            return_status_code = link.remove_student(
+                _grade=grade, _class=class_, _name=name)
+            if return_status_code == 0:
+                pass
+            elif return_status_code == -1:
+                print('您删除了一个不存在的数值！')
+        elif user_input == '3':
+            print('例子:六年级是6，六(3)班级则是6 3')
+            print('hint: 六(10)班仍然是6 10')
+            user_input = input('请输入年级和班级:')
+            print(f'{user_input.strip()[0]}({user_input.strip()[1]})班的学生有:')
+            # 这里user_input是列表，其中的每一项都是字符串
+            link.list_student(*list(map(int, user_input.strip().split())))
         else:
-            print('输入错误！')
-    _link.save_file('data.sms')
+            print('输入错误!')
+    link.save_student_to_file(save_file_name)
     print('数据已保存')
