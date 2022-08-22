@@ -154,10 +154,10 @@ if __name__ == '__main__':
         elif user_input == '3':
             print('例子:六年级是6，六(3)班级则是6 3')
             print('hint: 六(10)班仍然是6 10')
-            user_input = input('请输入年级和班级:').strip()
+            user_input = input('请输入年级和班级:').strip().split()
             print(f'{user_input[0]}({user_input[1]})班的学生有:')
             # 这里user_input是列表，其中的每一项都是字符串
-            link.list_student(*list(map(int, user_input.strip().split())))
+            link.list_student(*list(map(int, user_input)))
         else:
             print('输入错误!')
     if 'save_file_name' in locals():
