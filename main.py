@@ -67,9 +67,13 @@ def import_data():
         user_input = input('请输入导入文件名(初次使用请回车跳过):')
         if user_input == '':
             user_input = input('文件未创建，请设定初始的年级数和班级数:').strip().split()
-            link = lib.sql.School(grades=int(
-                user_input[0]), classes=int(user_input[1]))
-            break
+            try:
+                link = lib.sql.School(grades=int(
+                    user_input[0]), classes=int(user_input[1]))
+            except:
+                print('错误')
+            else:
+                break
         else:
             link = lib.sql.School(grades=-1, classes=-1)
             return_status_code = link.from_file_load_student(user_input)
