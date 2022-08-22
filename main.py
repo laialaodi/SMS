@@ -160,7 +160,7 @@ if __name__ == '__main__':
             link.list_student(*list(map(int, user_input.strip().split())))
         else:
             print('输入错误!')
-    if save_file_name in locals():
+    if 'save_file_name' in locals():
         link.save_student_to_file(save_file_name)
         print('数据已保存')
     else:
