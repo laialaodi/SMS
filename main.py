@@ -41,8 +41,7 @@ def login():
     print('欢迎进入系统')
     print('请登录')
     while 1:
-        user_input = input('请输入用户名和密码:')
-        user_input = user_input.strip().split()
+        user_input = input('请输入用户名和密码:').strip().split()
         if user_input[0] not in user_password:
             print('账户注册须得到管理员的许可，请向管理员提出申请，让管理员为你创建一个账户')
         elif len(user_input) == 1:
@@ -117,8 +116,7 @@ if __name__ == '__main__':
         elif user_input == '1':
             print('例子:六年级是6，六(3)班级则是63')
             print('hint: 六(10)班仍然是610')
-            user_input = input('请输入学生的年级班级姓名并用一个空格分开:')
-            user_input = user_input.strip().split()
+            user_input = input('请输入学生的年级班级姓名并用一个空格分开:').strip().split()
             grade = int(user_input[0])
             class_ = user_input[1]
             name = user_input[2].encode('utf-8').decode('utf-8')
@@ -126,8 +124,7 @@ if __name__ == '__main__':
         elif user_input == '2':
             print('例子:六年级是6，六(3)班级则是6 3')
             print('hint: 六(10)班仍然是6 10')
-            user_input = input('请输入学生的年级班级姓名并用一个空格分开:')
-            user_input = user_input.strip().split()
+            user_input = input('请输入学生的年级班级姓名并用一个空格分开:').strip().split()
             grade = int(user_input[0])
             class_ = user_input[1]
             name = user_input[2]
@@ -140,8 +137,8 @@ if __name__ == '__main__':
         elif user_input == '3':
             print('例子:六年级是6，六(3)班级则是6 3')
             print('hint: 六(10)班仍然是6 10')
-            user_input = input('请输入年级和班级:')
-            print(f'{user_input.strip()[0]}({user_input.strip()[1]})班的学生有:')
+            user_input = input('请输入年级和班级:').strip()
+            print(f'{user_input[0]}({user_input[1]})班的学生有:')
             # 这里user_input是列表，其中的每一项都是字符串
             link.list_student(*list(map(int, user_input.strip().split())))
         else:
