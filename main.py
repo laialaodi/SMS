@@ -54,6 +54,14 @@ def login():
 
 
 def import_data():
+    """从文件导入json数据
+    
+    参数
+        无
+
+    返回值
+        无
+    """
     global link
     while 1:
         user_input = input('请输入导入文件名(初次使用请回车跳过):')
@@ -119,7 +127,7 @@ if __name__ == '__main__':
             user_input = input('请输入学生的年级班级姓名并用一个空格分开:').strip().split()
             grade = int(user_input[0])
             class_ = user_input[1]
-            name = user_input[2].encode('utf-8').decode('utf-8')
+            name = user_input[2]
             link.add_student(_grade=grade, _class=class_, _name=name)
         elif user_input == '2':
             print('例子:六年级是6，六(3)班级则是6 3')
