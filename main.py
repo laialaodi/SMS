@@ -128,7 +128,7 @@ if __name__ == '__main__':
             grade = int(user_input[0])
             class_ = user_input[1]
             name = user_input[2]
-            link.add_student(_grade=grade, _class=class_, _name=name)
+            link.add_student(grade, class_, name)
         elif user_input == '2':
             print('例子:六年级是6，六(3)班级则是6 3')
             print('hint: 六(10)班仍然是6 10')
@@ -136,8 +136,7 @@ if __name__ == '__main__':
             grade = int(user_input[0])
             class_ = user_input[1]
             name = user_input[2]
-            return_status_code = link.remove_student(
-                _grade=grade, _class=class_, _name=name)
+            return_status_code = link.remove_student(grade, class_, name)
             if return_status_code == 0:
                 pass
             elif return_status_code == -1:
