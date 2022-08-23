@@ -101,11 +101,11 @@ class School:
             if _user_input == 'y' or _user_input == 'Y':
                 with open(filename, 'w') as f:
                     json.dump(self.table, f, skipkeys=True,
-                            ensure_ascii=False, indent=2)
+                              ensure_ascii=False, indent=2)
             elif _user_input == 'n' or _user_input == 'N':
                 return -1
         else:
             with open(filename, 'w') as f:
                 json.dump(self.table, f, skipkeys=True,
-                        ensure_ascii=False, indent=2)
+                          ensure_ascii=False, indent=2)
         return 0
