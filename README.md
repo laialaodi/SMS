@@ -1,6 +1,6 @@
-# Student Management System (SMS)
+# 目录
 
-- [Student Management System (SMS)](#student-management-system-sms)
+- [目录](#目录)
 - [关于](#关于)
 - [详细介绍](#详细介绍)
   - [登录](#登录)
