@@ -20,7 +20,7 @@ def import_password() -> None:
         无
     '''
     try:
-        with open('password.txt', 'r') as f:
+        with open('password.txt', 'r', encoding='utf-8') as f:
             lines = f.readlines()
         for line in lines:
             user_password[line.split()[0]] = line.split()[1]
@@ -42,6 +42,7 @@ def login():
     print('请登录')
     while 1:
         user_input = input('请输入用户名和密码:').strip().split()
+        print(user_input)
         if user_input[0] not in user_password:
             print('账户注册须得到管理员的许可，请向管理员提出申请，让管理员为你创建一个账户')
         elif len(user_input) == 1:
