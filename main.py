@@ -135,7 +135,7 @@ if __name__ == '__main__':
             name = user_input[2]
             return_status_code = link.add_student(grade, class_, name)
             if return_status_code == 0:
-                pass
+                print('添加成功')
             elif return_status_code == -1:
                 print('你触发了IndexError')
         elif user_input == '2':
@@ -147,7 +147,7 @@ if __name__ == '__main__':
             name = user_input[2]
             return_status_code = link.remove_student(grade, class_, name)
             if return_status_code == 0:
-                pass
+                print('删除成功')
             elif return_status_code == -1:
                 print('你正在删除一个不存在的学生！')
             elif return_status_code == -2:
