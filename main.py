@@ -11,14 +11,14 @@ link = None
 
 
 def import_password() -> None:
-    """由文件导入密码
+    '''由文件导入密码
 
     参数
         无
 
     返回值
         无
-    """
+    '''
     try:
         with open('password.txt', 'r') as f:
             lines = f.readlines()
@@ -29,14 +29,14 @@ def import_password() -> None:
 
 
 def login():
-    """登录系统
+    '''登录系统
 
     参数
         无
 
     返回值
         无
-    """
+    '''
     global user_name
     print('欢迎进入系统')
     print('请登录')
@@ -54,14 +54,14 @@ def login():
 
 
 def import_data():
-    """从文件导入json数据
+    '''从文件导入json数据
     
     参数
         无
 
     返回值
         无
-    """
+    '''
     global link
     while 1:
         user_input = input('请输入导入文件名(初次使用请回车跳过):')
