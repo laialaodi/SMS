@@ -11,14 +11,14 @@ link = None
 
 
 def import_password() -> None:
-    '''由文件导入密码
+    """由文件导入密码
 
     参数
         无
 
     返回值
         无
-    '''
+    """
     try:
         with open('password.txt', 'r', encoding='utf-8') as f:
             lines = f.readlines()
@@ -28,15 +28,16 @@ def import_password() -> None:
         pass
 
 
-def login():
-    '''登录系统
+
+def login() -> None:
+    """登录系统
 
     参数
         无
 
     返回值
         无
-    '''
+    """
     global user_name
     print('欢迎进入系统')
     print('请登录')
@@ -54,15 +55,17 @@ def login():
             print('用户名或密码错误!')
 
 
-def import_data():
-    '''从文件导入json数据
+
+def import_data() -> int:
+    """从文件导入json数据
     
     参数
         无
 
     返回值
-        无
-    '''
+        0 - 正常导入、创建
+        -1 - 失败
+    """
     global link
     while 1:
         user_input = input('请输入导入文件名(初次使用请回车跳过):')
@@ -73,14 +76,15 @@ def import_data():
                     user_input[0]), classes=int(user_input[1]))
             except:
                 print('错误')
+                return -1
             else:
-                break
+                return 0
         else:
             link = lib.sql.School(grades=-1, classes=-1)
             return_status_code = link.from_file_load_student(user_input)
             if return_status_code == 0:
                 print('导入成功')
-                break
+                return return_status_code
             elif return_status_code == -1:
                 print('文件不存在!')
 
