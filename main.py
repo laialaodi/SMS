@@ -20,7 +20,7 @@ def import_password() -> None:
         无
     """
     try:
-        with open('password.txt', 'r') as f:
+        with open('password.txt', 'r', encoding='utf-8') as f:
             lines = f.readlines()
         for line in lines:
             user_password[line.split()[0]] = line.split()[1]
@@ -28,7 +28,8 @@ def import_password() -> None:
         pass
 
 
-def login():
+
+def login() -> None:
     """登录系统
 
     参数
@@ -42,6 +43,7 @@ def login():
     print('请登录')
     while 1:
         user_input = input('请输入用户名和密码:').strip().split()
+        print(user_input)
         if user_input[0] not in user_password:
             print('账户注册须得到管理员的许可，请向管理员提出申请，让管理员为你创建一个账户')
         elif len(user_input) == 1:
@@ -53,14 +55,16 @@ def login():
             print('用户名或密码错误!')
 
 
-def import_data():
+
+def import_data() -> int:
     """从文件导入json数据
     
     参数
         无
 
     返回值
-        无
+        0 - 正常导入、创建
+        -1 - 失败
     """
     global link
     while 1:
@@ -72,14 +76,15 @@ def import_data():
                     user_input[0]), classes=int(user_input[1]))
             except:
                 print('错误')
+                return -1
             else:
-                break
+                return 0
         else:
             link = lib.sql.School(grades=-1, classes=-1)
             return_status_code = link.from_file_load_student(user_input)
             if return_status_code == 0:
                 print('导入成功')
-                break
+                return return_status_code
             elif return_status_code == -1:
                 print('文件不存在!')
 
@@ -122,19 +127,19 @@ if __name__ == '__main__':
             print('添加学生: 1')
             print('删除学生: 2')
             print('查询学生: 3')
-            print('退出系统: exit(直接退出不会保存!)')
+            print('退出系统: exit(直接关闭不会保存!)')
             print('保存数据: save')
             print('导入(还原)数据: load')
         elif user_input == '1':
-            print('例子:六年级是6，六(3)班级则是63')
-            print('hint: 六(10)班仍然是610')
+            print('例子:六年级是6，六(3)班级则是6 3')
+            print('hint: 六(10)班仍然是6 10')
             user_input = input('请输入学生的年级班级姓名并用一个空格分开:').strip().split()
             grade = int(user_input[0])
             class_ = int(user_input[1])
             name = user_input[2]
             return_status_code = link.add_student(grade, class_, name)
             if return_status_code == 0:
-                pass
+                print('添加成功')
             elif return_status_code == -1:
                 print('你触发了IndexError')
         elif user_input == '2':
@@ -146,7 +151,7 @@ if __name__ == '__main__':
             name = user_input[2]
             return_status_code = link.remove_student(grade, class_, name)
             if return_status_code == 0:
-                pass
+                print('删除成功')
             elif return_status_code == -1:
                 print('你正在删除一个不存在的学生！')
             elif return_status_code == -2:
