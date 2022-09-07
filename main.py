@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import lib.sql
+import include.sql
 
 user_password = {}
 
@@ -72,7 +72,7 @@ def import_data() -> int:
         if user_input == '':
             user_input = input('文件未创建，请设定初始的年级数和班级数:').strip().split()
             try:
-                link = lib.sql.School(grades=int(
+                link = include.sql.School(grades=int(
                     user_input[0]), classes=int(user_input[1]))
             except:
                 print('错误')
@@ -80,7 +80,7 @@ def import_data() -> int:
             else:
                 return 0
         else:
-            link = lib.sql.School(grades=-1, classes=-1)
+            link = include.sql.School(grades=-1, classes=-1)
             return_status_code = link.from_file_load_student(user_input)
             if return_status_code == 0:
                 print('导入成功')
